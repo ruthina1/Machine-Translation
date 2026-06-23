@@ -262,7 +262,7 @@ def load_checkpoint(filepath, device):
     ).to(device)
 
     restored_model.load_state_dict(checkpoint['model_state_dict'])
-    print(f"🔄 Checkpoint fully restored from {filepath}")
+    print(f"Checkpoint fully restored from {filepath}")
 
     return restored_model, in_lang, out_lang
 
@@ -349,17 +349,17 @@ def health():
 
 if __name__ == '__main__':
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    print(f"🚀 Inference will run on: {device}")
+    print(f"Inference will run on: {device}")
 
     checkpoint_path = os.path.join(os.path.dirname(__file__), 'transformer_fren_v1.pth')
 
     if not os.path.exists(checkpoint_path):
-        print(f"❌ Checkpoint not found at {checkpoint_path}")
+        print(f"Checkpoint not found at {checkpoint_path}")
         print("   Please run the training notebook first to generate the .pth file,")
         print("   then copy it into the model/ directory.")
         exit(1)
 
     model, input_lang, output_lang = load_checkpoint(checkpoint_path, device)
-    print("✅ Model loaded and ready for inference")
+    print("Model loaded and ready for inference")
 
     app.run(host='0.0.0.0', port=5000, debug=False)
